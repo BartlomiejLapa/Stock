@@ -1,4 +1,4 @@
-package com.bartlap.stock.configuration;
+package com.bartlap.stock.loginpage.configuration;
 
 import javax.activation.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
