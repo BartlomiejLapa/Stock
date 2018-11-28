@@ -8,7 +8,8 @@ CREATE TABLE users(
 id int unsigned NOT NULL PRIMARY KEY auto_increment,
 username char(16) NOT NULL,
 password char(72) NOT NULL,
-email varchar(255) NOT NULL 
+email varchar(255) NOT NULL, 
+active int(11) default NULL
 );
 
 DROP TABLE IF EXISTS wallet;

@@ -24,6 +24,17 @@ public class User {
   
     @Column(name = "email")
     private String email;   
+    
+    @Column(name = "active")
+    private int active;
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
 
     public int getId() {
         return id;
