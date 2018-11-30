@@ -1,6 +1,6 @@
 package com.bartlap.stock.loginpage.configuration;
 
-import javax.activation.DataSource;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,16 +23,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
     
-    private final String USERS_QUERY = "SELECT email, password, active FROM user WHERE email=?";
+    private final String USERS_QUERY = "SELECT email, password, active FROM users WHERE email=?";
+    private final String ROLES_QUERY = "SELECT u.email, r.role FROM users u INNER JOIN user_role ur ON (u.id = ur.user_id) INNER JOIN role r ON (ur.role_id=r.role_id) WHERE u.email=?";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/home").hasAuthority("1").anyRequest()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/home/**").hasAuthority("ALLOW").anyRequest()
                 .authenticated().and().csrf().disable()
-                .formLogin().loginPage("/index").failureUrl("/index?error=true")
-                .defaultSuccessUrl("/home")
+                .formLogin().loginPage("/login").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/home/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
@@ -42,7 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(60*60)
                 .and().exceptionHandling().accessDeniedPage("/access_denied");
-                //sprawdzic, has authority
     }
     
 
@@ -50,15 +52,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .usersByUsernameQuery(USERS_QUERY)
-                .dataSource((javax.sql.DataSource) dataSource)
-                .passwordEncoder(bCryptPasswordEncoder)
-                .authoritiesByUsernameQuery(USERS_QUERY);
+                .authoritiesByUsernameQuery(ROLES_QUERY)
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
     
-        @Bean
+    @Bean
     public PersistentTokenRepository persistentTokenRepository(){
         JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-        db.setDataSource((javax.sql.DataSource) dataSource);
+        db.setDataSource(dataSource);
         
         return db;
     }  
