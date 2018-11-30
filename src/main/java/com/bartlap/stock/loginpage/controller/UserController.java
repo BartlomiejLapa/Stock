@@ -1,4 +1,4 @@
-package com.bartlap.stock.controller;
+package com.bartlap.stock.loginpage.controller;
 
 import com.bartlap.stock.loginpage.model.User;
 import com.bartlap.stock.loginpage.service.UserService;
