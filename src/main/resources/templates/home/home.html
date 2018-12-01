@@ -3,10 +3,13 @@
  xmlns:th="http://www.thymeleaf.org">
 
 <head>
- <title>Web Stock - Sign in</title>
- <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
- <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
- <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <title>Web Stock - Sign in</title>
+    <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.js"></script>
+    <script src="/scripts/websocket.js"></script>
 </head>
 
 <body>
@@ -32,16 +35,40 @@
 
  
         <div class="row">
-            <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1 style="padding-top:100px;">Web Stock</h1>
-            <p class="lead">WITAMY </p>
+            <div>
+            <h1 style="padding-top:100px;">Web Stock - Welcome</h1>
+            <img src="/img/money_cash.jpg" class="title_img">
           </div>
 
         </div>
    
     </div>
     
-    
-
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+        
+            <h4>We have on the market today:</h4>
+         <div ng-app="stockApp" class="stockApp">
+            <table ng-controller="StockController" class="table table-hover">
+            
+                <tr class="table-danger">
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Unit</th>
+                </tr>
+                <tr ng-repeat="item in items" class="table-primary">
+                  <td>{{ item.Code}}</td>
+                  <td>{{ item.Name}}</td>
+                  <td>{{ item.Price}}</td>
+                  <td>{{ item.Unit}}</td>
+                </tr>
+                
+               
+          
+            </table>
+         </div>
+        </div>
+   </div>
 </body>
 </html>
