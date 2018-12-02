@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <title>Web Stock - Sign in</title>
+ <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <div class="container">
+        <a href="/" class="navbar-brand">Stock</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/signup}" >FREE Signup</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+
+ 
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1 style="padding-top:100px;">Web Stock</h1>
+            <p class="lead">Signin or create new account and have a fun and spend money! </p>
+          </div>
+        </div>
+   
+    </div>
+    
+    
+ <div class="container">
+  <div class="alert alert-dismissible alert-danger" role="alert" th:if="${param.error}">
+   Wrong email or password! 
+  </div>
+        <form th:action="@{/login}" method="post" >
+          <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+    <label for="inputEmail" class="sr-only">Login</label>
+       <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+       <label for="inputPassword" class="sr-only">Password</label>
+       <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+       <div class="checkbox mb-3">
+         <label>
+           <input type="checkbox" name="remember-me" /> Remember me
+         </label>
+       </div>
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+       <div class="margin-top20 text-center"> Don't have an account? <a th:href="@{/signup}">Free registration</a></div>
+  </form>
+    </div>
+</body>
+</html>
