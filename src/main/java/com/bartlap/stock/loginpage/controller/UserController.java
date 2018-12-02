@@ -2,6 +2,7 @@ package com.bartlap.stock.loginpage.controller;
 
 import com.bartlap.stock.loginpage.model.User;
 import com.bartlap.stock.loginpage.service.UserService;
+import com.bartlap.stock.wallet.model.Market;
 
 
 import javax.validation.Valid;
@@ -63,10 +64,14 @@ public class UserController {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-  
+        
         model.addObject("userName", user.getUsername());
         model.setViewName("home/home");
+
+        
         return model;
+        
+   
     }
      
     @RequestMapping(value= {"/access_denied"}, method=RequestMethod.GET)

@@ -16,16 +16,16 @@ active int(11) default NULL
 DROP TABLE IF EXISTS market;
 CREATE TABLE market(
 stockname char(11) NOT NULL PRIMARY KEY,
-quantity int(11) NOT NULL
+quantity int(11)  NULL
 );
 
 DROP TABLE IF EXISTS wallet;
 CREATE TABLE wallet(
-id int unsigned PRIMARY KEY auto_increment,
-stockname char(11),
-quantity int(11) NOT NULL,
-FOREIGN KEY(id) references users(id),
-FOREIGN KEY(stockname) references market(stockname)
+id int unsigned NOT NULL PRIMARY KEY,
+stockname char(11) default NULL,
+quantity int(11) default NULL,
+CONSTRAINT users_wallet FOREIGN KEY(id) references users(id),
+CONSTRAINT stockname_wallet FOREIGN KEY(stockname) references market(stockname)
 
 );
 
@@ -54,3 +54,5 @@ CONSTRAINT role_role FOREIGN KEY(role_id) REFERENCES role(role_id)
 );
 
 INSERT INTO `role` VALUES (1,'ALLOW');
+INSERT INTO `market` (stockname, quantity) VALUES('asd1',22);
+INSERT INTO `market` (stockname, quantity) VALUES('asd2',223);

@@ -1,4 +1,3 @@
-
 package com.bartlap.stock.loginpage.model;
 
 import java.util.Set;

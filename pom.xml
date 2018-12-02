@@ -62,7 +62,7 @@
                     <artifactId>nekohtml</artifactId>
                 </dependency>
 
-	</dependencies>
+        </dependencies>
 
                 <build>
                  <plugins>

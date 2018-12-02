@@ -36,8 +36,9 @@
  
         <div class="row">
             <div>
-            <h1 style="padding-top:100px;">Web Stock - Welcome</h1>
-            <img src="/img/money_cash.jpg" class="title_img">
+                <h1 style="padding-top:100px;">Web Stock - Welcome <span th:utext="${userName}" style="color:#2780e3;font-weight:bold;"></span></h1>
+            <img src="/img/money_cash.jpg" class="title_img"><br>
+    
           </div>
 
         </div>
@@ -46,7 +47,7 @@
     
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
-        
+  
             <h4>We have on the market today:</h4>
          <div ng-app="stockApp" class="stockApp">
             <table ng-controller="StockController" class="table table-hover">
@@ -64,6 +65,7 @@
                   <td>{{ item.Unit}}</td>
                 </tr>
                 
+        
                
           
             </table>
